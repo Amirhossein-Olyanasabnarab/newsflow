@@ -11,8 +11,19 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
-    public Article createArticle(String title, String summary, String content){
+    public Article createArticle(
+            String title,
+            String summary,
+            String content
+    ) {
+        if (title == null || title.isBlank()) {
+            throw new IllegalArgumentException(
+                    "Article title must not be blank"
+            );
+        }
+
         Article article = new Article(title, summary, content);
+
         return articleRepository.save(article);
     }
 }
